@@ -8,7 +8,7 @@
 <h4>
 
 📄 Paper: Coming Soon &nbsp;
-<a href="https://github.com/vivoCameraResearch/Magic-Makeup">🌐 Project Page</a> &nbsp;
+<a href="https://github.com/vivoCameraResearch/magicmakeup">🌐 Project Page</a> &nbsp;
 <a href="https://huggingface.co/Anyou/MagicMakeup">🤗 Hugging Face Models</a>
 </h4>
 

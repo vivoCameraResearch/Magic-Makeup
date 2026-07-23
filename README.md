@@ -2,7 +2,7 @@
 <img src="./assets/logo.png" width="320px">
 </div>
 
-<h1 align="center">[ECCV 2026] MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer</h1>
+<h1 align="center">[🎊 ECCV 2026] MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer</h1>
 <div align="center">
 
 <h4>
@@ -26,15 +26,15 @@
 
 ### ✨ Highlights
 
-🤩 Region-Controllable Framework
+🤩  Region-Controllable Framework
 
 A region-controllable DiT framework that achieves state-of-the-art performance across diverse styles and real-world data, with strong robustness and generalization.
 
-🧩 TARG and CMPG Modules
+🧩  TARG and CMPG Modules
 
 Token-aligned region constraints and transfer-preservation disentanglement enable precise regional transfer with reduced spillover and improved identity consistency.
 
-📊 High-Resolution Data and Benchmark
+📊  High-Resolution Data and Benchmark
 
 An automated makeup-removal pipeline constructs identity-consistent, region-labeled pairs, while MakeupHQ Bench standardizes evaluation in synthetic and real settings.
 
@@ -352,7 +352,7 @@ This project builds on the following open-source projects:
 
 We thank the authors and maintainers for making their work available.
 
-## Ethical Considerations
+## ❗️ Ethical Considerations
 
 MagicMakeup and its benchmark are intended only for non-commercial academic research on cosmetic makeup transfer and must not be used for identity recognition, face swapping, impersonation, or deceptive manipulation. Any real-face benchmark release will be de-identified and provided through gated access under a Data Usage Agreement that prohibits redistribution and identity-related misuse, with bias disclosure and an opt-out/removal mechanism for individuals and rights holders.
 

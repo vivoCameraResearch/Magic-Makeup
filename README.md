@@ -461,7 +461,8 @@ python evaluate/evalu.py \
   --recognition_model_id evaluate/cvlface/adaface_vit_base_kprpe_webface12m \
   --aligner_id evaluate/cvlface/DFA_mobilenet
 ```
-
+</details>
+  
 ## 📁 Repository Structure
 
 ```text

@@ -26,15 +26,15 @@
 
 ### ✨ Highlights
 
-🤩  Region-Controllable Framework
+#### 🤩 Region-Controllable Framework
 
 A region-controllable DiT framework that achieves state-of-the-art performance across diverse styles and real-world data, with strong robustness and generalization.
 
-🧩  TARG and CMPG Modules
+#### 🧩 TARG and CMPG Modules
 
 Token-aligned region constraints and transfer-preservation disentanglement enable precise regional transfer with reduced spillover and improved identity consistency.
 
-📊  High-Resolution Data and Benchmark
+#### 📊 High-Resolution Data and Benchmark
 
 An automated makeup-removal pipeline constructs identity-consistent, region-labeled pairs, while MakeupHQ Bench standardizes evaluation in synthetic and real settings.
 

@@ -2,8 +2,6 @@
 
 <img src="./assets/logo.png" width="300px">
 
-# MagicMakeup
-
 ### A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer
 
 **🎊 ECCV 2026**
@@ -11,11 +9,11 @@
 <a href="https://vivocameraresearch.github.io/magicmakeup/">
 <img src="https://img.shields.io/badge/Project-Page-8A2BE2?style=flat-square&logo=googlechrome&logoColor=white">
 </a>
-&nbsp;
+
 <a href="https://huggingface.co/Anyou/MagicMakeup">
 <img src="https://img.shields.io/badge/🤗%20Hugging%20Face-Models-FFD21E?style=flat-square">
 </a>
-&nbsp;
+
 <img src="https://img.shields.io/badge/Paper-Coming%20Soon-4C8BF5?style=flat-square">
 
 </div>
@@ -23,14 +21,14 @@
 <br>
 
 <table>
-<tr>
-<td width="50%" align="center">
-<img src="./assets/demo_left.gif" width="100%">
-</td>
-<td width="50%" align="center">
-<img src="./assets/demo_right.gif" width="100%">
-</td>
-</tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./assets/demo_left.webp" width="100%">
+    </td>
+    <td width="50%" align="center">
+      <img src="./assets/demo_right.webp" width="100%">
+    </td>
+  </tr>
 </table>
 
 <p align="center">
@@ -72,7 +70,7 @@ An automated makeup-removal pipeline constructs identity-consistent, region-labe
 <img src="./assets/method.png" width="100%">
 </div>
 
-MagicMakeup is built upon a diffusion transformer and introduces region-aware conditioning mechanisms for precise and faithful makeup transfer.
+MagicMakeup is built upon a DiT and introduces region-aware conditioning mechanisms for precise and faithful makeup transfer.
 
 ---
 
@@ -84,8 +82,6 @@ MagicMakeup is built upon a diffusion transformer and introduces region-aware co
 git clone https://github.com/vivoCameraResearch/Magic-Makeup.git
 cd Magic-Makeup
 ```
-
-All commands below should be run from the repository root unless otherwise specified.
 
 ### 2. Create the Environment
 
@@ -135,12 +131,6 @@ Some preprocessing and evaluation modules automatically download publicly availa
 
 ## 📦 Model Preparation
 
-MagicMakeup requires the following model components:
-
-- **FLUX.1-Kontext-dev** — base diffusion model
-- **MagicMakeup checkpoint** — our released model weights
-- **SigLIP So400m/14** — image encoder
-
 ### 1. FLUX.1-Kontext-dev
 
 MagicMakeup is built upon
@@ -157,31 +147,11 @@ huggingface-cli download black-forest-labs/FLUX.1-Kontext-dev \
 
 ### 2. MagicMakeup Checkpoint
 
-Download the released MagicMakeup checkpoint:
+Download the released [MagicMakeup](https://huggingface.co/Anyou/MagicMakeup) checkpoint:
 
 ```bash
 huggingface-cli download Anyou/MagicMakeup \
   --local-dir /path/to/MagicMakeup-checkpoint
-```
-
-### 3. SigLIP
-
-MagicMakeup uses
-[SigLIP So400m/14](https://huggingface.co/google/siglip-so400m-patch14-384).
-
-By default, the model is downloaded automatically on the first run.
-
-For offline inference, download it manually:
-
-```bash
-huggingface-cli download google/siglip-so400m-patch14-384 \
-  --local-dir /path/to/siglip-so400m-patch14-384
-```
-
-Then specify its local path:
-
-```bash
-export SIGLIP_MODEL_PATH=/path/to/siglip-so400m-patch14-384
 ```
 
 ---
@@ -274,7 +244,7 @@ python preprocess/faceparsing.py \
   --recursive
 ```
 
-#### Eye Masks
+#### Eyes Masks
 
 ```bash
 # Source images
@@ -362,18 +332,6 @@ python test_dir.py \
   --output_dir outputs/face \
   --panel_output_dir outputs/face_panel \
   --label eyes,lip,face
-```
-
-Generated results follow the naming convention:
-
-```text
-{source_stem}_{reference_stem}.jpg
-```
-
-For example:
-
-```text
-0001_0008.jpg
 ```
 
 ---
@@ -503,17 +461,6 @@ python evaluate/evalu.py \
   --recognition_model_id evaluate/cvlface/adaface_vit_base_kprpe_webface12m \
   --aligner_id evaluate/cvlface/DFA_mobilenet
 ```
-
-</details>
-
-> **Evaluation Notes**
->
-> - FID and KID require `torch-fidelity`.
-> - Distribution-based metrics require a sufficiently large number of samples for meaningful statistics.
-> - Evaluation checkpoints may be downloaded automatically during the first run.
-> - The DINO ViT-B/8 checkpoint is downloaded through `torch.hub` and cached in the local PyTorch checkpoint directory.
-
----
 
 ## 📁 Repository Structure
 

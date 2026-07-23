@@ -24,11 +24,21 @@
 
 ## 📖 Overview
 
-### Abstract
+### ✨ Highlights
 
-Makeup transfer applies the reference makeup to the source face while preserving the source identity. Despite advances in full-face editing by diffusion-based methods, strong regional controllability, makeup fidelity, and identity preservation remain challenging. The reasons are (i) pixel-to-attention misalignment that causes spillover into non-target areas and weakens regional control; (ii) unclear transfer/preservation concept separation under two-image conditioning, leading to coupling between makeup attributes and identity; and (iii) the lack of a high-resolution dataset that is identity-consistent and region-labeled for fine-grained supervision. In this paper, we propose MagicMakeup, a diffusion transformer-based framework for region-controllable and high-fidelity makeup transfer, built on spatial constraints and concept disentanglement. To enable precise region-specific editing while preserving identity, we propose Token-Aligned Region Gating, which aligns pixel masks with attention and applies region-specific logit gating. To clarify the concepts of transfer and preservation, we further introduce Cross-Modal Perception Guidance, which aligns text and image features to enhance cross-modal concept perception. We also design a pipeline for the generation of $1024 \times 1024$ data pairs through region-specific makeup removal and establish a unified benchmark in synthetic and real settings. Extensive quantitative and qualitative experiments show that MagicMakeup improves regional controllability, makeup fidelity, and identity preservation, with strong robustness across styles, races, and poses.
+🤩 Region-Controllable Framework
 
-### Architecture
+A region-controllable DiT framework that achieves state-of-the-art performance across diverse styles and real-world data, with strong robustness and generalization.
+
+🧩 TARG and CMPG Modules
+
+Token-aligned region constraints and transfer-preservation disentanglement enable precise regional transfer with reduced spillover and improved identity consistency.
+
+📊 High-Resolution Data and Benchmark
+
+An automated makeup-removal pipeline constructs identity-consistent, region-labeled pairs, while MakeupHQ Bench standardizes evaluation in synthetic and real settings.
+
+### 😈 Architecture
 
 <div align="center">
 <img src="./assets/method.png" width="100%">

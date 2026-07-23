@@ -1,0 +1,28 @@
+# Python and notebook caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local system and editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Runtime outputs
+outputs/
+metrics/
+*.log
+
+# Downloaded checkpoints and model repositories
+*.bin
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+evaluate/dino/.github/dino.gif
+evaluate/cvlface/

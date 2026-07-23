@@ -1,154 +1,237 @@
-<div align=center>
-<img src="./assets/logo.png" width="320px">
-</div>
-
-<h1 align="center">[🎊 ECCV 2026] MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer</h1>
 <div align="center">
 
-<h4>
+<img src="./assets/logo.png" width="300px">
 
-📄 Paper: Coming Soon &nbsp;
-<a href="https://vivocameraresearch.github.io/magicmakeup/">🌐 Project Page</a> &nbsp;
-<a href="https://huggingface.co/Anyou/MagicMakeup">🤗 Hugging Face Models</a>
-</h4>
+# MagicMakeup
+
+### A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer
+
+**🎊 ECCV 2026**
+
+<a href="https://vivocameraresearch.github.io/magicmakeup/">
+<img src="https://img.shields.io/badge/Project-Page-8A2BE2?style=flat-square&logo=googlechrome&logoColor=white">
+</a>
+&nbsp;
+<a href="https://huggingface.co/Anyou/MagicMakeup">
+<img src="https://img.shields.io/badge/🤗%20Hugging%20Face-Models-FFD21E?style=flat-square">
+</a>
+&nbsp;
+<img src="https://img.shields.io/badge/Paper-Coming%20Soon-4C8BF5?style=flat-square">
 
 </div>
+
+<br>
+
+<table>
+<tr>
+<td width="50%" align="center">
+<img src="./assets/demo_left.gif" width="100%">
+</td>
+<td width="50%" align="center">
+<img src="./assets/demo_right.gif" width="100%">
+</td>
+</tr>
+</table>
+
+<p align="center">
+<sub>
+✨ High-Fidelity Makeup Transfer
+&nbsp;&nbsp; · &nbsp;&nbsp;
+🎯 Precise Region Control
+&nbsp;&nbsp; · &nbsp;&nbsp;
+🪞 Identity Preservation
+</sub>
+</p>
 
 <div align="center">
 <img src="./assets/teaser.png" width="100%">
 </div>
 
-<div align="center">
-<strong><i>MagicMakeup</i>: a diffusion transformer for high-fidelity, region-controllable makeup transfer.</strong>
-</div>
+<p align="center">
+<strong><i>MagicMakeup</i></strong> enables high-fidelity makeup transfer with precise region-level control while preserving facial identity and structure.
+</p>
 
-## 📖 Overview
+---
 
-### ✨ Highlights
+## ✨ Highlights
 
-#### 🤩 Region-Controllable Framework
+🎯 **Precise Region Control**  
+MagicMakeup supports both full-face and localized makeup transfer, enabling flexible control over eye, lip, and facial makeup regions.
 
-A region-controllable DiT framework that achieves state-of-the-art performance across diverse styles and real-world data, with strong robustness and generalization.
+🧩 **TARG & CMPG Module**  
+Token-aligned region constraints and transfer-preservation disentanglement improve regional accuracy, reduce makeup spillover, and preserve identity consistency.
 
-#### 🧩 TARG and CMPG Modules
+📊 **High-Resolution Data & MakeupHQ Bench**  
+An automated makeup-removal pipeline constructs identity-consistent, region-labeled training pairs, while MakeupHQ Bench provides standardized evaluation across synthetic and real-world settings.
 
-Token-aligned region constraints and transfer-preservation disentanglement enable precise regional transfer with reduced spillover and improved identity consistency.
+---
 
-#### 📊 High-Resolution Data and Benchmark
-
-An automated makeup-removal pipeline constructs identity-consistent, region-labeled pairs, while MakeupHQ Bench standardizes evaluation in synthetic and real settings.
-
-### 😈 Architecture
+## 🧠 Method Overview
 
 <div align="center">
 <img src="./assets/method.png" width="100%">
 </div>
 
-## 🛠️ Environment Setup
+MagicMakeup is built upon a diffusion transformer and introduces region-aware conditioning mechanisms for precise and faithful makeup transfer.
 
-Run all commands below from the repository root:
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/vivoCameraResearch/Magic-Makeup.git
 cd Magic-Makeup
 ```
 
-Create the environment and install the main dependencies:
+All commands below should be run from the repository root unless otherwise specified.
+
+### 2. Create the Environment
+
+We recommend using Python 3.10.
 
 ```bash
 conda create -n magicmakeup python=3.10 pip -y
 conda activate magicmakeup
+```
 
+Install PyTorch:
+
+```bash
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
   --index-url https://download.pytorch.org/whl/cu124
+```
 
+Install the remaining dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-Install the optional evaluation dependencies:
+<details>
+<summary><b>Optional evaluation dependencies</b></summary>
+
+<br>
+
+The following packages are required for the complete evaluation pipeline:
 
 ```bash
 pip install lpips torch-fidelity
+```
+
+Install the CLIP implementation used in our evaluation:
+
+```bash
 pip uninstall -y clip
 pip install -e evaluate/CLIP-main
 ```
 
-The first face-parsing and DINO evaluation runs may download their public
-pretrained weights.
+Some preprocessing and evaluation modules automatically download publicly available pretrained weights during the first run.
+
+</details>
+
+---
 
 ## 📦 Model Preparation
 
-MagicMakeup uses
-[FLUX.1-Kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev)
-as its base model. Accept the model license and download the Diffusers-format
-repository:
+MagicMakeup requires the following model components:
+
+- **FLUX.1-Kontext-dev** — base diffusion model
+- **MagicMakeup checkpoint** — our released model weights
+- **SigLIP So400m/14** — image encoder
+
+### 1. FLUX.1-Kontext-dev
+
+MagicMakeup is built upon
+[FLUX.1-Kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev).
+
+After accepting the model license on Hugging Face, download the Diffusers-format repository:
 
 ```bash
 huggingface-cli login
+
 huggingface-cli download black-forest-labs/FLUX.1-Kontext-dev \
   --local-dir /path/to/FLUX.1-Kontext-dev
 ```
 
-Download the [MagicMakeup](https://huggingface.co/Anyou/MagicMakeup) checkpoint:
+### 2. MagicMakeup Checkpoint
+
+Download the released MagicMakeup checkpoint:
 
 ```bash
 huggingface-cli download Anyou/MagicMakeup \
   --local-dir /path/to/MagicMakeup-checkpoint
 ```
 
-MagicMakeup also uses
+### 3. SigLIP
+
+MagicMakeup uses
 [SigLIP So400m/14](https://huggingface.co/google/siglip-so400m-patch14-384).
-It is downloaded automatically on the first run. For offline use, download it
-in advance and set its local path:
+
+By default, the model is downloaded automatically on the first run.
+
+For offline inference, download it manually:
 
 ```bash
 huggingface-cli download google/siglip-so400m-patch14-384 \
   --local-dir /path/to/siglip-so400m-patch14-384
+```
 
+Then specify its local path:
+
+```bash
 export SIGLIP_MODEL_PATH=/path/to/siglip-so400m-patch14-384
 ```
 
-## 🚀 Test
+---
+
+## 💄 Inference
 
 ### 1. Prepare the Data
 
-The recommended directory layout is:
+We recommend organizing source and reference images as follows:
 
 ```text
 data/
-|-- source/
-|   |-- raw/
-|   |-- image/
-|   `-- mask/
-|       |-- face/
-|       |-- eyes/
-|       `-- lip/
-`-- makeup/
-    |-- raw/
-    |-- image/
-    `-- mask/
-        |-- face/
-        |-- eyes/
-        `-- lip/
+├── source/
+│   ├── raw/
+│   ├── image/
+│   └── mask/
+│       ├── face/
+│       ├── eyes/
+│       └── lip/
+└── makeup/
+    ├── raw/
+    ├── image/
+    └── mask/
+        ├── face/
+        ├── eyes/
+        └── lip/
 ```
 
-Image and mask IDs must match. Both mask naming styles are supported:
+Image and mask IDs must match. Both mask naming conventions below are supported:
 
 ```text
 image/0001.jpg
 mask/0001.png
+```
+
+or
+
+```text
+image/0001.jpg
 mask/0001_mask.png
 ```
 
 ### 2. Crop Face Images
 
-`prepocess/crop.py` detects the main face, filters invalid samples, produces
-a centered `1024 x 1024` crop, and writes `log.tsv`.
+`preprocess/crop.py` detects the primary face, filters invalid samples, generates a centered `1024 × 1024` crop, and records processing information in `log.tsv`.
 
-Crop source images:
+**Source images:**
 
 ```bash
-python prepocess/crop.py \
+python preprocess/crop.py \
   --input_dir data/source/raw \
   --out_dir data/source/image \
   --det_model mediapipe/blaze_face_short_range.tflite \
@@ -157,10 +240,10 @@ python prepocess/crop.py \
   --min_face_ratio 0.1
 ```
 
-Crop reference images:
+**Makeup reference images:**
 
 ```bash
-python prepocess/crop.py \
+python preprocess/crop.py \
   --input_dir data/makeup/raw \
   --out_dir data/makeup/image \
   --det_model mediapipe/blaze_face_short_range.tflite \
@@ -169,55 +252,63 @@ python prepocess/crop.py \
   --min_face_ratio 0.1
 ```
 
-Add `--keep_subdirs` when the input directory hierarchy should be retained.
+Add `--keep_subdirs` if the original input directory hierarchy should be preserved.
 
-### 3. Generate Masks
+### 3. Generate Region Masks
 
-#### Face masks
+#### Face Masks
 
-`faceparsing.py` uses `jonathandinu/face-parsing` to create binary face masks.
+`preprocess/faceparsing.py` uses `jonathandinu/face-parsing` to generate binary face masks.
 
 ```bash
-python prepocess/faceparsing.py \
+# Source images
+python preprocess/faceparsing.py \
   --img_path data/source/image \
   --save_path data/source/mask/face \
   --recursive
 
-python prepocess/faceparsing.py \
+# Makeup reference images
+python preprocess/faceparsing.py \
   --img_path data/makeup/image \
   --save_path data/makeup/mask/face \
   --recursive
 ```
 
-#### Eyes or lip masks
-
-`regionmask.py` uses MediaPipe landmarks to generate regional masks.
+#### Eye Masks
 
 ```bash
-# Eyes masks
-python prepocess/regionmask.py \
+# Source images
+python preprocess/regionmask.py \
   --input_dir data/source/image \
   --output_dir data/source/mask/eyes \
   --regions eyes
 
-python prepocess/regionmask.py \
+# Makeup reference images
+python preprocess/regionmask.py \
   --input_dir data/makeup/image \
   --output_dir data/makeup/mask/eyes \
   --regions eyes
+```
 
-# Lip masks
-python prepocess/regionmask.py \
+#### Lip Masks
+
+```bash
+# Source images
+python preprocess/regionmask.py \
   --input_dir data/source/image \
   --output_dir data/source/mask/lip \
   --regions lip
 
-python prepocess/regionmask.py \
+# Makeup reference images
+python preprocess/regionmask.py \
   --input_dir data/makeup/image \
   --output_dir data/makeup/mask/lip \
   --regions lip
 ```
 
 ### 4. Single-Pair Inference
+
+Run inference for a single source-reference pair:
 
 ```bash
 python test_single.py \
@@ -232,13 +323,33 @@ python test_single.py \
   --panel_path outputs/0001_0001_panel.jpg
 ```
 
-`--label` accepts `eyes`, `lip`, or `eyes,lip,face`. The default `model_offload` mode reduces VRAM use; add
-`--memory_mode sequential_offload` only when more memory saving is required.
+The `--label` argument controls which makeup regions are transferred:
+
+```text
+--label eyes
+--label lip
+--label eyes,lip,face
+```
+
+For full makeup transfer, use:
+
+```bash
+--label eyes,lip,face
+```
+
+The default `model_offload` mode is recommended for most GPUs. For devices with limited GPU memory, use:
+
+```bash
+--memory_mode sequential_offload
+```
+
+> **Note:** Sequential CPU offloading further reduces GPU memory usage but may increase inference latency.
 
 ### 5. Batch Inference
 
-`test_dir.py` matches images and masks by filename stem: every source is paired with every makeup reference.
-Images without matching masks are reported and skipped.
+`test_dir.py` performs all-to-all pairing between source images and makeup references.
+
+Images and masks are automatically matched by filename stem. Samples without matching masks are reported and skipped.
 
 ```bash
 python test_dir.py \
@@ -253,13 +364,41 @@ python test_dir.py \
   --label eyes,lip,face
 ```
 
+Generated results follow the naming convention:
+
+```text
+{source_stem}_{reference_stem}.jpg
+```
+
+For example:
+
+```text
+0001_0008.jpg
+```
+
+---
+
 ## 📊 Evaluation
 
-The evaluation pipeline has three stages.
+The evaluation pipeline consists of three stages:
 
-### 1. Generate the source-reference CSV
+```text
+Source & Reference Images
+          │
+          ▼
+   Generate Pair List
+          │
+          ▼
+ Landmark Detection
+  & Face Alignment
+          │
+          ▼
+   Metric Evaluation
+```
 
-This creates the `src,ref` Cartesian product expected by `prevalu.py`:
+### 1. Generate Source-Reference Pairs
+
+Generate the Cartesian product between source and reference images:
 
 ```bash
 python evaluate/generate_pairs_csv.py \
@@ -268,10 +407,17 @@ python evaluate/generate_pairs_csv.py \
   --output_csv metrics/pairs.csv
 ```
 
-### 2. Detect landmarks and build the evaluation CSV
+This produces the `src,ref` pair list required by the evaluation preprocessing script.
 
-Generated images must use the `{source_stem}_{reference_stem}.jpg` naming
-convention produced by `test_dir.py`.
+### 2. Prepare Images for Evaluation
+
+Generated images should follow the naming convention:
+
+```text
+{source_stem}_{reference_stem}.jpg
+```
+
+Run landmark detection and evaluation preprocessing:
 
 ```bash
 python evaluate/prevalu.py \
@@ -284,18 +430,31 @@ python evaluate/prevalu.py \
   --target_height 1024
 ```
 
-This writes:
+The processed files are stored as:
 
 ```text
 metrics/run1/
-|-- MagicMakeup.csv
-|-- src/
-`-- gen/MagicMakeup/
+├── MagicMakeup.csv
+├── src/
+└── gen/
+    └── MagicMakeup/
 ```
 
-### 3. Compute metrics
+### 3. Compute Metrics
 
-The following command computes Self-Sim, DINO-I, CLIP-I, BG-MSE, FID, and KID:
+The evaluation pipeline supports the following metrics:
+
+| Category | Metric |
+| :--- | :--- |
+| Identity / Structure | Self-Sim |
+| Makeup Similarity | DINO-I |
+| Semantic Similarity | CLIP-I |
+| Background Preservation | BG-MSE |
+| Distribution Quality | FID |
+| Distribution Quality | KID |
+| Face Identity | Face-ID |
+
+Run evaluation without Face-ID:
 
 ```bash
 python evaluate/evalu.py \
@@ -306,23 +465,34 @@ python evaluate/evalu.py \
   --skip_face_id
 ```
 
-Face-ID is optional and requires two pretrained
-[CVLFace](https://github.com/mk-minchul/CVLface) models. Download both the
-[AdaFace recognition model](https://huggingface.co/minchul/cvlface_adaface_vit_base_kprpe_webface12m)
-and the
-[DFA alignment model](https://huggingface.co/minchul/cvlface_DFA_mobilenet):
+<details>
+<summary><b>Optional: Face-ID Evaluation</b></summary>
+
+<br>
+
+Face-ID evaluation requires two pretrained models from
+[CVLFace](https://github.com/mk-minchul/CVLface):
+
+- AdaFace face recognition model
+- DFA face alignment model
+
+Download the AdaFace recognition model:
 
 ```bash
 huggingface-cli download \
   minchul/cvlface_adaface_vit_base_kprpe_webface12m \
   --local-dir evaluate/cvlface/adaface_vit_base_kprpe_webface12m
+```
 
+Download the DFA alignment model:
+
+```bash
 huggingface-cli download \
   minchul/cvlface_DFA_mobilenet \
   --local-dir evaluate/cvlface/DFA_mobilenet
 ```
 
-Then run the evaluation without `--skip_face_id`:
+Then run the complete evaluation:
 
 ```bash
 python evaluate/evalu.py \
@@ -334,14 +504,37 @@ python evaluate/evalu.py \
   --aligner_id evaluate/cvlface/DFA_mobilenet
 ```
 
-FID and KID require `torch-fidelity` and enough samples for meaningful
-distribution statistics. Evaluation weights may be downloaded on the first
-run. The DINO ViT-B/8 checkpoint is downloaded automatically by `torch.hub`
-and cached in the PyTorch checkpoints directory.
+</details>
+
+> **Evaluation Notes**
+>
+> - FID and KID require `torch-fidelity`.
+> - Distribution-based metrics require a sufficiently large number of samples for meaningful statistics.
+> - Evaluation checkpoints may be downloaded automatically during the first run.
+> - The DINO ViT-B/8 checkpoint is downloaded through `torch.hub` and cached in the local PyTorch checkpoint directory.
+
+---
+
+## 📁 Repository Structure
+
+```text
+Magic-Makeup/
+├── assets/                 # README figures and demo animations
+├── data/                   # Input images and region masks
+├── evaluate/               # Evaluation pipeline
+├── preprocess/             # Face cropping and mask generation
+├── outputs/                # Generated results
+├── test_single.py          # Single-pair inference
+├── test_dir.py             # Batch inference
+├── requirements.txt
+└── README.md
+```
+
+---
 
 ## 🙏 Acknowledgements
 
-This project builds on the following open-source projects:
+This project builds upon the following excellent open-source projects:
 
 - [FLUX.1-Kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev)
 - [Diffusers](https://github.com/huggingface/diffusers)
@@ -350,21 +543,39 @@ This project builds on the following open-source projects:
 - [CLIP](https://github.com/openai/CLIP)
 - [CVLFace](https://github.com/mk-minchul/CVLface)
 
-We thank the authors and maintainers for making their work available.
+We sincerely thank the authors and maintainers for making their work publicly available.
 
-## ❗️ Ethical Considerations
+---
 
-MagicMakeup and its benchmark are intended only for non-commercial academic research on cosmetic makeup transfer and must not be used for identity recognition, face swapping, impersonation, or deceptive manipulation. Any real-face benchmark release will be de-identified and provided through gated access under a Data Usage Agreement that prohibits redistribution and identity-related misuse, with bias disclosure and an opt-out/removal mechanism for individuals and rights holders.
+## ❗ Ethical Considerations
+
+MagicMakeup and MakeupHQ Bench are intended solely for non-commercial academic research on cosmetic makeup transfer.
+
+They must not be used for identity recognition, face swapping, impersonation, deceptive manipulation, or other identity-related misuse.
+
+Any real-face benchmark release will be de-identified and distributed through gated access under a Data Usage Agreement that prohibits redistribution and identity-related misuse. Bias disclosure and opt-out or removal mechanisms will also be provided for individuals and rights holders.
+
+---
 
 ## 📜 Citation
 
-If you find MagicMakeup useful for your research, please cite:
+If you find MagicMakeup useful for your research, please consider citing our work:
 
 ```bibtex
 @inproceedings{magicmakeup2026,
-  title     = {MagicMakeup},
-  author    = {Ziyi Wang, Siming Zheng, Yang Yang, Shusong Xu, Hao Zhang, Bo Li, Changqing Zou, Peng-Tao Jiang},
+  title     = {MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer},
+  author    = {Ziyi Wang and Siming Zheng and Yang Yang and Shusong Xu and Hao Zhang and Bo Li and Changqing Zou and Peng-Tao Jiang},
   booktitle = {European Conference on Computer Vision (ECCV)},
   year      = {2026}
 }
 ```
+
+---
+
+<div align="center">
+
+### ✨ MagicMakeup
+
+**High-Fidelity · Region-Controllable · Identity-Preserving**
+
+</div>

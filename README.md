@@ -14,7 +14,9 @@
 <img src="https://img.shields.io/badge/🤗%20Hugging%20Face-Models-FFD21E?style=flat-square">
 </a>
 
-<img src="https://img.shields.io/badge/Paper-Coming%20Soon-4C8BF5?style=flat-square">
+<a href="https://arxiv.org/abs/2607.20924">
+<img src="https://img.shields.io/badge/Paper-Arxiv-4C8BF5?style=flat-square">
+</a>
 
 </div>
 

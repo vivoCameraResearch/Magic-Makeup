@@ -512,11 +512,11 @@ Any real-face benchmark release will be de-identified and distributed through ga
 If you find MagicMakeup useful for your research, please consider citing our work:
 
 ```bibtex
-@inproceedings{magicmakeup2026,
-  title     = {MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup Transfer},
-  author    = {Ziyi Wang and Siming Zheng and Yang Yang and Shusong Xu and Hao Zhang and Bo Li and Changqing Zou and Peng-Tao Jiang},
-  booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2026}
+@article{wang2026magicmakeup,
+  title={MagicMakeup: A Region-Controllable Diffusion Transformer for High-Fidelity Makeup-Transfer},
+  author={Wang, Ziyi and Zheng, Siming and Yang, Yang and Xu, Shusong and Zhang, Hao and Li, Bo and Zou, Changqing and Jiang, Peng-Tao},
+  journal={arXiv preprint arXiv:2607.20924},
+  year={2026}
 }
 ```
 

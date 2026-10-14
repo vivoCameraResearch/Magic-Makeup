@@ -340,6 +340,8 @@ python test_dir.py \
 
 ## 📊 Evaluation
 
+MakeupHQ Benchmark: https://huggingface.co/datasets/Anyou/MakeupHQ
+
 The evaluation pipeline consists of three stages:
 
 ```text
